@@ -1,0 +1,23 @@
+<html>
+ <head>
+ <title>In-Vehicle Coupon Recommendation</title> 
+ <style>
+    body {
+        background-color: #EEF2FA;
+        font-family: Verdana;
+      }
+ </style>
+</head>
+ <body>
+       <p> Prediction: {{ prediction }} </p>
+
+ 	 {% if prediction == 1 %} 
+	     <p> "The customer likes to <b><i> accept </i></b> the <b><i> {{ coupon }} </i></b> coupon"   </p>
+		<br>
+	  {% else %}
+		<p> "The customer likes to <b><i> reject </i></b> the <b><i> {{ coupon }} </i></b> coupon"   </p>
+		<br>
+	{% endif %}
+ </body>
+ </html>
+ 

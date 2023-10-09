@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 60%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>In-Vehicle Coupon Recommendation</h1>
+<p>Please fill the form to submit test data</p>
+
+<div class="container">
+  <form method='POST' action='/predict' enctype="multipart/form-data">
+
+  <div class="row">
+    <div class="col-25">
+      <label for="destination">Destination</label>
+    </div>
+    <div class="col-75">
+      <select id="destination" name="destination">
+        <option value="No Urgent Place">No Urgent Place</option>
+        <option value="Home">Home</option>
+        <option value="Work">Work</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="weather">weather</label>
+    </div>
+    <div class="col-75">
+      <select id="weather" name="weather">
+        <option value="Sunny">Sunny</option>
+        <option value="Rainy">Rainy</option>
+        <option value="Snowy">Snowy</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="passanger">passanger</label>
+    </div>
+    <div class="col-75">
+      <select id="passanger" name="passanger">
+        <option value="Alone">Alone</option>
+        <option value="Friend(s)">Friend(s)</option>
+        <option value="Kid(s)">Kid(s)</option>
+        <option value="Partner">Partner</option>
+      </select>
+    </div>
+  </div>
+
+  
+
+
+  <div class="row">
+    <div class="col-25">
+      <label for="temperature">temperature</label>
+    </div>
+    <div class="col-75">
+      <select id="temperature" name="temperature">
+        <option value="80" selected>80</option>
+        <option value="55">55</option>
+        <option value="30">30</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="coupon">coupon</label>
+    </div>
+    <div class="col-75">
+      <select id="coupon" name="coupon">
+        <option value="Restaurant(<20)">Restaurant(<20)</option>
+        <option value="Coffee House">Coffee House</option>
+        <option value="Carry out & Take away">Carry out & Take away</option>
+        <option value="Bar">Bar</option>
+        <option value="Restaurant(20-50)">Restaurant(20-50)</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="expiration">expiration</label>
+    </div>
+    <div class="col-75">
+      <select id="expiration" name="expiration">
+        <option value="1d">1d</option>
+        <option value="2h">2h</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="gender">gender</label>
+    </div>
+    <div class="col-75">
+      <select id="gender" name="gender">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="age">age</label>
+    </div>
+    <div class="col-75">
+      <select id="age" name="age">
+        '21' '46' '26' '31' '41' '50plus' '36' 'below21'
+        <option value="21">21</option>
+        <option value="46">46</option>
+        <option value="26">26</option>
+        <option value="31">31</option>
+        <option value="41">41</option>
+        <option value="50plus">50plus</option>        
+        <option value="36">36</option>
+        <option value="below21">below21</option>
+
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="maritalStatus">maritalStatus</label>
+    </div>
+    <div class="col-75">
+      <select id="maritalStatus" name="maritalStatus">
+        <option value="Unmarried partner">Unmarried partner</option>
+        <option value="Single">Single</option>
+        <option value="Married partner">Married partner</option>
+        <option value="Divorced">Divorced</option>
+        <option value="Widowed">Widowed</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="has_children">has_children</label>
+    </div>
+    <div class="col-75">
+      <select id="has_children" name="has_children">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="education">education</label>
+    </div>
+    <div class="col-75">
+      <select id="education" name="education">
+        <option value="Some college - no degree">Some college - no degree</option>
+        <option value="Bachelors degree">Bachelors degree</option>
+        <option value="Associates degree">Associates degree</option>
+        <option value="High School Graduate">High School Graduate</option>
+        <option value="Graduate degree (Masters or Doctorate)">Graduate degree (Masters or Doctorate)</option>
+        <option value="Some High School">Some High School</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="occupation">occupation</label>
+    </div>
+    <div class="col-75">
+      <select id="occupation" name="occupation">
+        <option value="Unemployed">Unemployed</option>
+        <option value="Architecture & Engineering">Architecture & Engineering</option>
+        <option value="Student">Student</option>
+        <option value="Education&Training&Library">Education&Training&Library</option>
+        <option value="Healthcare Support">Healthcare Support</option>
+        <option value="Healthcare Practitioners & Technical">Healthcare Practitioners & Technical</option>
+        <option value="Sales & Related">Sales & Related</option>
+        <option value="Management">Management</option>
+        <option value="Arts Design Entertainment Sports & Media">Arts Design Entertainment Sports & Media</option>
+        <option value="Computer & Mathematical">Computer & Mathematical</option>        
+        <option value="Life Physical Social Science">Life Physical Social Science</option>
+        <option value="Personal Care & Service">Personal Care & Service</option>
+        <option value="Community & Social Services">Community & Social Services</option>
+        <option value="Office & Administrative Support">Office & Administrative Support</option>
+        <option value="Construction & Extraction">Construction & Extraction</option>
+        <option value="Legal">Legal</option>
+        <option value="Retired">Retired</option>
+        <option value="Installation Maintenance & Repair">Installation Maintenance & Repair</option>
+        <option value="Transportation & Material Moving">Transportation & Material Moving</option>
+        <option value="Business & Financial">Business & Financial</option>
+        <option value="Protective Service">Protective Service</option>
+        <option value="Food Preparation & Serving Related">Food Preparation & Serving Related</option>
+        <option value="Production Occupations">Production Occupations</option>
+        <option value="Building & Grounds Cleaning & Maintenance">Building & Grounds Cleaning & Maintenance</option>
+        <option value="Farming Fishing & Forestry">Farming Fishing & Forestry</option>
+      </select>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="income">income</label>
+    </div>
+    <div class="col-75">
+      <select id="income" name="income">
+        <option value="$37500 - $49999">$37500 - $49999</option>
+        <option value="$62500 - $74999">$62500 - $74999</option>
+        <option value="$75000 - $87499">$75000 - $87499</option>
+        <option value="$50000 - $62499">$50000 - $62499</option>
+        <option value="$25000 - $37499">$25000 - $37499</option>
+        <option value="$100000 or More">$100000 or More</option>
+        <option value="$87500 - $99999">$87500 - $99999</option>
+        <option value="Less than $12500">Less than $12500</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="car">car</label>
+    </div>
+    <div class="col-75">
+      <select id="car" name="car">
+        <option value="Scooter and motorcycle">Scooter and motorcycle</option>
+        <option value="crossover">crossover</option>
+        <option value="Mazda5">Mazda5</option>
+        <option value="do not drive">do not drive</option>
+        <option value="Car that is too old to install Onstar :D">Car that is too old to install Onstar :D</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="Bar">Bar</label>
+    </div>
+    <div class="col-75">
+      <select id="Bar" name="Bar">
+        <option value="never">never</option>
+        <option value="less1">less1</option>
+        <option value="1~3">1~3</option>
+        <option value="gt8">gt8</option>
+        <option value="4~8">4~8</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="CoffeeHouse">CoffeeHouse</label>
+    </div>
+    <div class="col-75">
+      <select id="CoffeeHouse" name="CoffeeHouse">
+        <option value="never">never</option>
+        <option value="less1">less1</option>
+        <option value="1~3">1~3</option>
+        <option value="gt8">gt8</option>
+        <option value="4~8">4~8</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="CarryAway">CarryAway</label>
+    </div>
+    <div class="col-75">
+      <select id="CarryAway" name="CarryAway">
+        <option value="never">never</option>
+        <option value="less1">less1</option>
+        <option value="1~3">1~3</option>
+        <option value="gt8">gt8</option>
+        <option value="4~8">4~8</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="RestaurantLessThan20">RestaurantLessThan20</label>
+    </div>
+    <div class="col-75">
+      <select id="RestaurantLessThan20" name="RestaurantLessThan20">
+        <option value="never">never</option>
+        <option value="less1">less1</option>
+        <option value="1~3">1~3</option>
+        <option value="gt8">gt8</option>
+        <option value="4~8">4~8</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="Restaurant20To50">Restaurant20To50</label>
+    </div>
+    <div class="col-75">
+      <select id="Restaurant20To50" name="Restaurant20To50">
+        <option value="never">never</option>
+        <option value="less1">less1</option>
+        <option value="1~3">1~3</option>
+        <option value="gt8">gt8</option>
+        <option value="4~8">4~8</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="toCoupon_GEQ5min">toCoupon_GEQ5min</label>
+    </div>
+    <div class="col-75">
+      <select id="toCoupon_GEQ5min" name="toCoupon_GEQ5min">
+        <option value="1">1</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="toCoupon_GEQ15min">toCoupon_GEQ15min</label>
+    </div>
+    <div class="col-75">
+      <select id="toCoupon_GEQ15min" name="toCoupon_GEQ15min">
+        <option value="1">1</option>
+        <option value="0">0</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="toCoupon_GEQ25min">toCoupon_GEQ25min</label>
+    </div>
+    <div class="col-75">
+      <select id="toCoupon_GEQ25min" name="toCoupon_GEQ25min">
+        <option value="1">1</option>
+        <option value="0">0</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="direction_same">direction_same</label>
+    </div>
+    <div class="col-75">
+      <select id="direction_same" name="direction_same">
+        <option value="1">1</option>
+        <option value="0">0</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="direction_opp">direction_opp</label>
+    </div>
+    <div class="col-75">
+      <select id="direction_opp" name="direction_opp">
+        <option value="1">1</option>
+        <option value="0">0</option>
+      </select>
+    </div>
+  </div>
+
+  <button type='submit'>Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
+
+
